@@ -1,1 +1,1 @@
-## React TS Project
+## Lorem Ipsum
