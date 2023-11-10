@@ -13,6 +13,7 @@ export default function App() {
             step='1'
             max='8'
             value='2'
+            onChange={() => {}}
           />
           <button className='btn'>generate</button>
         </form>
