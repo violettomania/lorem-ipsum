@@ -2,14 +2,20 @@ import React from 'react';
 import text from '../data';
 
 export default function App() {
-  const [paragraphCount, setParagraphCount] = React.useState(1);
+  const [paragraphCount, setParagraphCount] = React.useState('1');
   const [displayedParagraphs, setDisplayedParagraphs] = React.useState<
     string[]
   >([]);
 
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
-    setDisplayedParagraphs(text.slice(0, paragraphCount));
+    const count = Math.round(parseFloat(paragraphCount));
+    if (isNaN(count)) {
+      alert('Please enter a valid number.');
+    }
+    // if the user enters a floating point number, display the rounded number
+    setParagraphCount(count.toString());
+    setDisplayedParagraphs(text.slice(0, count));
   };
 
   return (
@@ -26,7 +32,7 @@ export default function App() {
             step='1'
             max={text.length}
             value={paragraphCount}
-            onChange={(e) => setParagraphCount(parseInt(e.target.value))}
+            onChange={(e) => setParagraphCount(e.target.value)}
           />
           <button className='btn' onClick={handleSubmit}>
             generate
