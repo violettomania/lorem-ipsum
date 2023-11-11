@@ -1,4 +1,17 @@
+import React from 'react';
+import text from '../data';
+
 export default function App() {
+  const [paragraphCount, setParagraphCount] = React.useState(1);
+  const [displayedParagraphs, setDisplayedParagraphs] = React.useState<
+    string[]
+  >([]);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setDisplayedParagraphs(text.slice(0, paragraphCount));
+  };
+
   return (
     <main>
       <section className='section-center'>
@@ -11,34 +24,18 @@ export default function App() {
             id='amount'
             min='1'
             step='1'
-            max='8'
-            value='2'
-            onChange={() => {}}
+            max={text.length}
+            value={paragraphCount}
+            onChange={(e) => setParagraphCount(parseInt(e.target.value))}
           />
-          <button className='btn'>generate</button>
+          <button className='btn' onClick={handleClick}>
+            generate
+          </button>
         </form>
         <article className='lorem-text'>
-          <p>
-            Jelly sweet roll jelly beans biscuit pie macaroon chocolate donut.
-            Carrot cake caramels pie sweet apple pie tiramisu carrot cake.
-            Marzipan marshmallow croissant tootsie roll lollipop. Cupcake lemon
-            drops bear claw gummies. Jelly bear claw gummi bears lollipop cotton
-            candy gummi bears chocolate bar cake cookie. Cupcake muffin danish
-            muffin cookie gummies. Jelly beans tiramisu pudding. Toffee soufflé
-            chocolate cake pastry brownie. Oat cake halvah sweet roll cotton
-            candy croissant lollipop. Macaroon tiramisu chocolate bar candy
-            candy carrot cake jelly sweet. Gummies croissant macaroon dessert.
-            Chocolate cake dragée pie.
-          </p>
-          <p>
-            Next level tbh everyday carry, blog copper mug forage kitsch roof
-            party pickled hammock kale chips tofu. Etsy shoreditch 8-bit
-            microdosing, XOXO viral butcher banh mi humblebrag listicle woke
-            bicycle rights brunch before they sold out ramps. Twee shabby chic
-            taiyaki flannel, enamel pin venmo vape four loko. Hexagon kale chips
-            typewriter kitsch 8-bit organic plaid small batch keffiyeh ethical
-            banh mi narwhal echo park cronut.
-          </p>
+          {displayedParagraphs.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
         </article>
       </section>
     </main>
