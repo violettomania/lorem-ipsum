@@ -7,7 +7,7 @@ export default function App() {
     string[]
   >([]);
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
     setDisplayedParagraphs(text.slice(0, paragraphCount));
   };
@@ -28,7 +28,7 @@ export default function App() {
             value={paragraphCount}
             onChange={(e) => setParagraphCount(parseInt(e.target.value))}
           />
-          <button className='btn' onClick={handleClick}>
+          <button className='btn' onClick={handleSubmit}>
             generate
           </button>
         </form>
